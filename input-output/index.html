@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a-z</title>
+    <link rel="stylesheet" href="https://use.typekit.net/kai7wnr.css">
+    <style>
+            
+            body{
+            align-items: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 10px;
+            margin: 0;
+            margin-top: 80px;
+            }
+        
+        #text{
+            font-family: "bd-micronfont", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px;
+            color:#cc0000
+        }
+
+        /* STYLE FOR THE INPUT FIELD */
+        #charInput {
+            border-radius: 25px;
+            border: 1.5px solid #3b4cca;
+            font-size: 1.5rem;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            font-family: "bd-micronfont", sans-serif;
+            color: #cc0000;
+
+        }
+
+        /* STYLE FOR THE SUBMIT BUTTON */
+        #submitButton {
+            color: #ffde00;
+            font-size: 20px;
+            font-family: "bd-micronfont", sans-serif;
+            background-color: #3b4cca;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            transform:scale(1.1)
+        }
+
+        /* STYLE FOR THE IMAGE */
+        #displayedImage {
+            display: none;
+            margin-top: 60px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1 id=text> enter any letter</h1>
+    
+    <!-- INPUT FIELD FOR 1 CHARACTER -->
+    <input type="text" id="charInput" maxlength="1">
+
+    <!-- BUTTON TO DISPLAY IMAGE -->
+    <button onclick="displayImage()" id="submitButton">GO!</button>
+
+    <!-- IMAGE TO DISPLAY -->
+    <img id="displayedImage" src="" alt="Displayed Image">
+
+
+
+    <!-- Image Display Script Below -->
+    <script>
+        // Array of images
+        // DIRECTIONS: UPDATE THE URLS WITH THE RELATIVE LINKS OF YOUR IMAGES
+        const images = [
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/a/af/Abra.jpg", //A
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/5/51/Bulbasaur.jpg", //B
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/6/69/Charizard.jpg", //C
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/f/fc/Ditto.jpg", //D
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/b/b3/Espeon.jpg", //E
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/f/f8/Floette.jpg", //F
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/7/78/Gengar.jpg", //G
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/e/e8/Happiny.jpg", //H
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/1/14/Inkay.jpg", //I
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/8/83/Jigglypuff.jpg", //J
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/5/55/Kirlia.jpg", //K
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/f/fe/Lickilicky.jpg", //L
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/8/80/Mew.jpg", //M
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/1/14/Nidorina.jpg", //N
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/b/b0/Octillery.jpg", //O
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/8/89/Pikachu.jpg", //P
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/1/17/Quagsire.jpg", //Q
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/6/64/Riolu.jpg", //R
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/f/f4/Sylveon.jpg", //S
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/e/eb/Talonflame.jpg", //T
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/a/a5/Umbreon.jpg", //U
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/1/12/Venusaur.jpg", //V
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/b/b7/Wartortle.jpg", //W
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/d/d5/Xerneas.jpg", //X
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/4/4a/Yanma.jpg", //Y
+            "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-sun-pokemon-moon/5/5f/Zigzagoon.jpg"  //Z
+        ];
+
+        function displayImage() {
+            const input = document.getElementById("charInput").value.toUpperCase();
+            const imgElement = document.getElementById("displayedImage");
+            
+            // Assign an image based on character (A-Z)
+            const index = input.charCodeAt(0) - 65; // 'A' is 65 in ASCII
+            if (index >= 0 && index < images.length) {
+                imgElement.src = images[index];
+                imgElement.style.display = "block";
+            } else {
+                /* 
+                alert("Please enter a letter between A and Z.");
+                imgElement.style.display = "none";
+                */
+
+                // IF INVALID INPUT IS ENTERED, DISPLAY ALTERNATE IMAGE
+                imgElement.src = "https://media.giphy.com/media/j2xgBIuAgmrpS/giphy.gif?cid=790b7611feo0z7v2qy7extdiao2fd3yswisoi95qtcyybqvs&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+                imgElement.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
